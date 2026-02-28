@@ -1,0 +1,224 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "0697f0e9-f281-4931-a280-8d4bd20b8024",
+      "name": "When chat message received",
+      "webhookId": "57b68350-fa84-41fb-87d1-03f5e44c13bc"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "34ac153d-1343-4877-9508-ad2d25203430",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        80,
+        208
+      ],
+      "id": "faf591f8-11d4-4901-9b3e-17c342be06ea",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "zHBW0uG2XOrOdwdb",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        224,
+        208
+      ],
+      "id": "785463a9-b841-4d75-bea6-86f9d3a41792",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+      "typeVersion": 1,
+      "position": [
+        800,
+        160
+      ],
+      "id": "7da13314-6ca8-4e64-b73b-e006e8f2731b",
+      "name": "Wikipedia"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        960,
+        160
+      ],
+      "id": "3a513b7a-4640-4985-9f57-ed52d98924d2",
+      "name": "Calculator"
+    },
+    {
+      "parameters": {
+        "path": "0e819a8d-2f3e-4486-b233-96702ade8e1d"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 2,
+      "position": [
+        864,
+        -80
+      ],
+      "id": "e8304b3e-30b9-494c-94aa-d4944110a4f6",
+      "name": "MCP Server Trigger",
+      "webhookId": "0e819a8d-2f3e-4486-b233-96702ade8e1d"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dateTimeTool",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        160
+      ],
+      "id": "f3f5bf7d-1982-4d8d-a916-eea2cdb8f7fc",
+      "name": "Date & Time"
+    },
+    {
+      "parameters": {
+        "endpointUrl": "https://tamoghnowork2026.app.n8n.cloud/mcp/0e819a8d-2f3e-4486-b233-96702ade8e1d",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.2,
+      "position": [
+        400,
+        192
+      ],
+      "id": "f55b7ba4-c6e0-465f-a525-84ca97c94e7f",
+      "name": "MCP Client"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wikipedia": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "c1b26b0d-3baa-49bc-b6b2-bba43c7a4c50",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "859607c38a9b1fcdbe38cde0da874826dad865fdbf9fccd1bcf61d441939cd30"
+  },
+  "id": "u1MnUyRcxQFeyZj7",
+  "tags": []
+}
